@@ -1,0 +1,21 @@
+.icon {
+    color: #FF7630;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+  }
+  
+  .icon:hover {
+    color: #383838;
+  }
+
+.iconContainer {
+    display:none;
+}
+
+/* Mobile devices (1220px and down) */
+@media(max-width: 1220px) {
+.iconContainer {
+    display:block;
+}
+
+}

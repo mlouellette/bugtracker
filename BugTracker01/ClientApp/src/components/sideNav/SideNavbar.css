@@ -1,0 +1,22 @@
+    div .sidenav {
+        position: fixed; 
+        top: 0 !important;
+        bottom: 0 !important;    
+        background-color: #383838;
+        height: 100vh;
+        z-index: 5;
+        box-shadow:5px 0px 5px -2px rgba(0,0,0,0.3);
+        
+    }
+
+    .sideNavContainer {
+        display:block;
+    }
+
+/* Mobile devices (1220px and down) */
+@media(max-width: 1220px) {
+    .sideNavContainer {
+        display:none;
+    }
+
+}

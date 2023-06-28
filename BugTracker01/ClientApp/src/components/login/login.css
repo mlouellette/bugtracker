@@ -1,0 +1,80 @@
+.mainPage {
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+    background-image: url(../assets/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    text-align:center;
+}
+
+.loginContainer {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    height: 100vh; 
+    padding-left: 10%;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    color: #383838;
+    width: 50%;
+    max-width: 500px;
+    background-color: rgba(255, 255, 255, 0.80);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+
+    border-radius: 15px;
+    padding: 5%;
+    font-family: Arial, sans-serif; 
+    
+}
+
+.titles {
+    text-align:center;
+    
+}
+
+.bug {
+    max-width: 15%;
+    height: auto;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px; 
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+input {
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    font-size: 1em;
+}

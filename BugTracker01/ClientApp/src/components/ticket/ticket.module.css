@@ -1,0 +1,13 @@
+
+.contentWrapper {
+    position: relative;
+    margin-top: -11.5rem; 
+  }
+
+.ticketWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+  

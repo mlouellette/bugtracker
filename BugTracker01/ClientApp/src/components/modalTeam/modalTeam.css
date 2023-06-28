@@ -1,0 +1,4 @@
+.selectFocus:focus {
+    border-color: #FF7630 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 118, 48, 0.25) !important;
+}

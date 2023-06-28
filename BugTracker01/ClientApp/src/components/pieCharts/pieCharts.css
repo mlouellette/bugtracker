@@ -1,0 +1,11 @@
+.pieChartsContainer {
+    display:block;
+}
+
+/* Mobile devices (1220px and down) */
+@media(max-width: 1220px) {
+.pieChartsContainer {
+    display:none;
+}
+
+}
