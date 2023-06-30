@@ -6,6 +6,7 @@ import ProjectList from "../projectList/ProjectList.jsx";
 import { ticketData } from "../fakedb/db.js";
 import "./userTicket.css";
 import { useNavigate } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 
 import {
   MDBCol,
@@ -31,10 +32,9 @@ export default function UserTicket() {
   const [tickets, setTickets] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem("name")) {
+    /*if (!localStorage.getItem("name")) {
       return navigate("/");
-    }
-
+    }*/
 
     function getTickets() {
       setTickets(ticketData);
@@ -53,7 +53,9 @@ export default function UserTicket() {
       <div className="contentWrapper">
         <MDBContainer>
           <MDBRow>
-            <MDBCol size="12">
+          <MDBCol size="12">
+          <Card>
+            <Card.Body>
               <ProjectList
                 buttonAction={{
                   columns: tickets.columns,
@@ -82,7 +84,9 @@ export default function UserTicket() {
                     ? localStorage.getItem("name")
                     : "name"
                 }'s Ticket List`}
-              />
+                                      />
+                                          </Card.Body>
+                                      </Card>
             </MDBCol>
           </MDBRow>
         </MDBContainer>

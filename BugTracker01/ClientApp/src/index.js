@@ -11,11 +11,24 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
+const { Auth0Provider } = require("@auth0/auth0-react");
+
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 root.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>);
+    <Auth0Provider
+        domain={domain}
+        clientId={clientId}
+        authorizationParams={{
+            redirect_uri: window.location.origin,
+        }}
+    >
+        <BrowserRouter basename={baseUrl}>
+            <App />
+        </BrowserRouter>
+    </Auth0Provider>
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -10,6 +10,8 @@ import Alert from 'react-bootstrap/Alert';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 function Login() {
   const [account, setAccount] = useState("signup");
   const [name, setName] = useState("");
@@ -20,6 +22,8 @@ function Login() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     localStorage.removeItem("name");
@@ -163,7 +167,9 @@ function Login() {
             </p>
           <p>Demo admin: admin@email.com<br/>
           Demo developer: dev@email.com<br/>
-          password: enter something random</p>
+                            password: enter something random</p>
+
+             <button onClick={() => loginWithRedirect()}>Log In</button>;
           </form></div>
         </div>
       </>

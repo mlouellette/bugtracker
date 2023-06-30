@@ -43,6 +43,7 @@ function ProjectList(props) {
           striped
           bordered
           small
+          lengthChange={false}
           data={props.buttonAction}
           style={{ backgroundColor: "white" }}
         />

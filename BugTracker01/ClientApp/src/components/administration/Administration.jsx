@@ -48,9 +48,9 @@ export default function Administration() {
   const [tickets, setTickets] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem("role") !== "admin") {
+    /*if (localStorage.getItem("role") !== "admin") {
       return navigate("/error");
-    }
+    }*/
 
     function getTickets() {
       setTickets(ticketData);

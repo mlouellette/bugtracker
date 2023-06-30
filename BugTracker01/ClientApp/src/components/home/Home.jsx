@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth0 } from '@auth0/auth0-react';
 import TopNav from "../../components/topNav/TopNav.jsx";
 import SideNavbar from "../../components/sideNav/SideNavbar.jsx";
 import ProjectList from "../../components/projectList/ProjectList.jsx";
@@ -8,32 +9,47 @@ import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 import { projectData } from "../fakedb/db.js";
 import ModalProject from "../modalProject/ModalProject.jsx";
+import Card from "react-bootstrap/Card";
 
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
 export default function Home() {
-  const [projects, setProjects] = useState(null);
-  const navigate = useNavigate();
+    const { user, isAuthenticated } = useAuth0();
+    const [projects, setProjects] = useState(null);
+    const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    // navigate(`/tickets/${project}`);
-    navigate("/tickets");
-  };
+    const handleButtonClick = () => {
+        // navigate(`/tickets/${project}`);
+        navigate("/tickets");
+    };
 
-  useEffect(() => {
+    useEffect(() => {
 
-    if (!localStorage.getItem("name")) {
-        return navigate("/");
-    }
+        if (isAuthenticated) {
+            fetch('http://localhost:5265/api/Users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Name: user.name,
+                    Birthdate: new Date(), // Or another value
+                    AuthO_ID: user.sub, // This is the unique user ID from Auth0
+                    Role: 'developer', // Or another value
+                    CreatedAt: new Date(),
+                    UpdatedAt: new Date()
+                })
+            });
+        }
 
-    function getProjects() {
-      setProjects(projectData);
-    }
+        function getProjects() {
+            setProjects(projectData);
+        }
 
-    getProjects();
-  }, []);
+        getProjects();
+    }, [isAuthenticated, user]);
 
-  if (!projects) return null;
+    if (!projects) return null;
 
   return (
     <>
@@ -56,8 +72,10 @@ export default function Home() {
                   zIndex: 1,
                 }}
               >
+                              </div>
+          <Card>
+            <Card.Body>
                 <ModalProject />
-              </div>
               <ProjectList
                 buttonAction={{
                   columns: projects.columns,
@@ -75,7 +93,9 @@ export default function Home() {
                   })),
                 }}
                 title="Project List"
-              />
+                                      />
+              </Card.Body>
+            </Card>
             </MDBCol>
           </MDBRow>
         </MDBContainer>

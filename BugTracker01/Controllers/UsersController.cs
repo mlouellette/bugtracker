@@ -85,10 +85,19 @@ namespace BugTracker01.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Users == null)
-          {
-              return Problem("Entity set 'AppDbContext.Users'  is null.");
-          }
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'AppDbContext.Users'  is null.");
+            }
+
+            // Check if user already exists based on AuthO_ID
+            var existingUser = _context.Users.FirstOrDefault(u => u.AuthO_ID == user.AuthO_ID);
+
+            if (existingUser != null)
+            {
+                return Conflict(new { message = "User already exists" });
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

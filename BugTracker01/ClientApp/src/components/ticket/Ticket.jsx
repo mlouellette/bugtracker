@@ -9,6 +9,7 @@ import ProjectList from "../projectList/ProjectList.jsx";
 import { ticketData } from "../fakedb/db.js";
 import TeamTable from "../teamTable/TeamTable.jsx";
 import styles from "./ticket.module.css";
+import Card from "react-bootstrap/Card";
 
 import {
   MDBCol,
@@ -34,9 +35,9 @@ export default function Ticket() {
   const [tickets, setTickets] = useState(null);
 
   useEffect(() => {
-    if (!localStorage.getItem("name")) {
+    /*if (!localStorage.getItem("name")) {
         return navigate("/");
-    }
+    }*/
 
     function getTickets() {
       setTickets(ticketData);
@@ -55,41 +56,49 @@ export default function Ticket() {
       <div className={styles.contentWrapper}>
         <MDBContainer>
           <MDBRow>
-            {/* -------------------------- upper row ----------------------------  */}
-            <MDBCol size="3">
-              <div style={{ position: "relative", marginTop: "-4rem" }}>
-                <ModalTeam />
-                <div className="mt-3">
-                  <TeamTable />
-                </div>
-              </div>
-            </MDBCol>
+                          {/* -------------------------- upper row ----------------------------  */}
+        
+                          <div className="col-12">
+                              <Card>
+                                  <Card.Body>
+                                      <MDBRow>
+                                          <MDBCol size="2">
+                                              <div>
+                                                  <ModalTeam />
+                                                  <div className="mt-3">
+                                                      <TeamTable />
+                                                  </div>
+                                              </div>
+                                          </MDBCol>
+                             
 
-            <MDBCol size="1"></MDBCol>
-
-            <MDBCol size="8">
-              <ProjectList
-                buttonAction={{
-                  columns: tickets.columns,
-                  rows: tickets.rows.map((row) => ({
-                    ...row,
-                    info: (
-                      <center>
-                        <button
-                          onClick={handleToggle}
-                          className="btn btn-link"
-                          style={{color: '#FF7630'}}
-                        >
-                          . . .
-                        </button>
-                      </center>
-                    ),
-                  })),
-                }}
-                className="bg-white"
-                title="Project's ticket list"
-              />
-            </MDBCol>
+                                          <MDBCol size="9">
+                                              <ProjectList
+                                                  buttonAction={{
+                                                      columns: tickets.columns,
+                                                      rows: tickets.rows.map((row) => ({
+                                                          ...row,
+                                                          info: (
+                                                              <center>
+                                                                  <button
+                                                                      onClick={handleToggle}
+                                                                      className="btn btn-link"
+                                                                      style={{ color: '#FF7630' }}
+                                                                  >
+                                                                      . . .
+                                                                  </button>
+                                                              </center>
+                                                          ),
+                                                      })),
+                                                  }}
+                                                  className="bg-white"
+                                                  title="Project's ticket list"
+                                              />
+                                          </MDBCol>
+                                      </MDBRow>
+                                  </Card.Body>
+                              </Card>
+                          </div>
 
             {/* -------------------------- lower row ----------------------------  */}
 
