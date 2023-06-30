@@ -8,8 +8,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy",
+    builder =>
+    {
+        builder
+            .WithOrigins("https://localhost:44464")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
 // Add DbContext
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("bugtracker")));
+
+
 
 // Auth0 Add Authentication Services
 builder.Services.AddAuthentication(options =>
@@ -39,6 +53,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Use the CORS policy
+app.UseCors("MyPolicy");
 
 // Auth0 Enable authentication middleware
 app.UseAuthentication();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SideNavbar.css";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +8,13 @@ import "react-toastify/dist/ReactToastify.css";
 import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
+import { useAuth0 } from '@auth0/auth0-react';
+
 export default function SideNavbar() {
+  const { logout, isLoading } = useAuth0();
+
   const navigate = useNavigate();
+
   return (
     <div className="sideNavContainer">
       <SideNav
@@ -85,7 +90,7 @@ export default function SideNavbar() {
 
           <br />
 
-          <NavItem eventKey="">
+          <NavItem onClick={() => logout()}>
             <NavIcon>
               <i
                 className="fa-solid fa-arrow-right-from-bracket"
@@ -93,7 +98,7 @@ export default function SideNavbar() {
               ></i>
             </NavIcon>
             <NavText>logout</NavText>
-          </NavItem>
+          </NavItem> 
         </SideNav.Nav>
       </SideNav>
     </div>

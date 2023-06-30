@@ -27,6 +27,7 @@ export default function Home() {
 
         if (isAuthenticated) {
             fetch('http://localhost:5265/api/Users', {
+                crossDomain: true,
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -39,7 +40,15 @@ export default function Home() {
                     CreatedAt: new Date(),
                     UpdatedAt: new Date()
                 })
-            });
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                })
+                .catch(error => {
+                    console.log('Fetch error: ', error);
+                });
         }
 
         function getProjects() {
