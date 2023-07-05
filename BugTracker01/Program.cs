@@ -2,6 +2,8 @@ using BugTracker01.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,16 +12,17 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyPolicy",
-    builder =>
-    {
-        builder
-            .WithOrigins("https://localhost:44464")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
-    });
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:44464")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod()
+                                                  .AllowCredentials();
+                          });
 });
+
+
 // Add DbContext
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("bugtracker")));
 
@@ -55,7 +58,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 // Use the CORS policy
-app.UseCors("MyPolicy");
+app.UseCors(MyAllowSpecificOrigins);
 
 // Auth0 Enable authentication middleware
 app.UseAuthentication();

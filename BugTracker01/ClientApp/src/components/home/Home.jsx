@@ -34,21 +34,13 @@ export default function Home() {
                 },
                 body: JSON.stringify({
                     Name: user.name,
-                    Birthdate: new Date(), // Or another value
-                    AuthO_ID: user.sub, // This is the unique user ID from Auth0
-                    Role: 'developer', // Or another value
+                    Birthdate: new Date(),
+                    AuthO_ID: user.sub,
+                    Role: 'developer',
                     CreatedAt: new Date(),
                     UpdatedAt: new Date()
                 })
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                })
-                .catch(error => {
-                    console.log('Fetch error: ', error);
-                });
         }
 
         function getProjects() {

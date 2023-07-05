@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BugTracker01.Models;
 
+
 namespace BugTracker01.Controllers
 {
     [Route("api/[controller]")]
