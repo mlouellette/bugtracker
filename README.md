@@ -1,4 +1,4 @@
-# Bugtracker ( UNDER CONSTURCTION )
+# Bugtracker ( UNDER CONSTRUCTION )
 
 This is a business-centric application solving real world issues thatdevelopers issues to keep track of projects in development trough ticket system. The aim of this project is to showcases my skills in Full-Stack development. The application demonstrates proficiency in the following technologies:
 
